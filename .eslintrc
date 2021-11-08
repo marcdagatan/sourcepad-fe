@@ -1,0 +1,33 @@
+{
+  "extends": ["eslint:recommended", "airbnb", "prettier"],
+  "plugins": ["lodash-fp", "prettier"],
+  "parser": "babel-eslint",
+  "env": {
+    "jest": true,
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "no-use-before-define": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "react/destructuring-assignment": 0,
+    "max-len": [2, 120, 4, { "ignoreUrls": true }],
+    "prefer-destructuring": 0,
+    "prefer-const": 0,
+  },
+  "globals": {
+    "fetch": false,
+    "document": true,
+    "localStorage": true,
+    "FormData": true,
+    "window": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extesions": [".js", ".jsx"]
+      }
+    }
+  }
+}
