@@ -15,6 +15,7 @@
     "max-len": [2, 120, 4, { "ignoreUrls": true }],
     "prefer-destructuring": 0,
     "prefer-const": 0,
+    "react/jsx-props-no-spreading": "off"
   },
   "globals": {
     "fetch": false,
