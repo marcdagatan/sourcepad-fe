@@ -8,7 +8,7 @@ import {
 } from '../actions/types';
 
 const DEFAULT_STATE = {
-  user: null,
+  user: {},
   signup: { processing: false, errors: {} },
   authState: null,
   authToken: null,

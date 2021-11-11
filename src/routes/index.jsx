@@ -3,10 +3,12 @@ import { Routes, Route } from 'react-router-dom';
 
 import Homepage from '../pages/Homepage';
 import Login from '../pages/Login';
+import Dashboard from '../pages/Dashboard';
 
 export default () => (
   <Routes>
     <Route exact path="/" element={<Homepage />} />
     <Route exact path="/login" element={<Login />} />
+    <Route exact path="/dashboard" element={<Dashboard />} />
   </Routes>
 );

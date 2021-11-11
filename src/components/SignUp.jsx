@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Card, CardContent, CardActions, Button, Typography, Grid, Box } from '@mui/material';
@@ -17,12 +17,18 @@ const ActionsBox = styled(Box)`
 
 const arrToStr = arr => (arr ? arr.join(', ') : '');
 
-const SignUp = ({ signUp, processing, errors }) => {
+const SignUp = ({ signUp, processing, errors, authState }) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
+  useEffect(() => {
+    if (authState === 'newUser') {
+      navigate('/dashboard');
+    }
+  }, [authState]);
 
   return (
     <Card>
@@ -92,10 +98,12 @@ SignUp.propTypes = {
   signUp: PropTypes.func.isRequired,
   processing: PropTypes.bool.isRequired,
   errors: signUpErrorsPropTypes,
+  authState: PropTypes.string,
 };
 
 SignUp.defaultProps = {
   errors: {},
+  authState: null,
 };
 
 export default SignUp;
