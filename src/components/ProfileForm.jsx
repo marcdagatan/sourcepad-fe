@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import _ from 'lodash/fp';
 
 import TextField from './TextField';
@@ -10,6 +11,8 @@ import { axiosAuthenticated } from '../config/axios';
 import arrToStr from '../utils/arrToStr';
 
 const ProfileForm = ({ user: { profile, ...user }, createProfile }) => {
+  const navigate = useNavigate();
+  const haveProfile = _.keys(profile).length;
   const fromProfile = key => (profile ? profile[key] : '');
 
   const [firstName, setFirstName] = useState(fromProfile('firstName'));
@@ -58,7 +61,7 @@ const ProfileForm = ({ user: { profile, ...user }, createProfile }) => {
 
   return (
     <>
-      {!_.keys(profile).length && (
+      {!haveProfile && (
         <Alert>
           Weclcome, {user.email}! <br />
           Before proceeding, you need to complete your profile.
@@ -159,6 +162,11 @@ const ProfileForm = ({ user: { profile, ...user }, createProfile }) => {
       <Button onClick={() => setPersisting(true)} disabled={persisting} size="large" variant="contained">
         Save Profile
       </Button>
+      {haveProfile && (
+        <Button variant="outlined" size="large" onClick={() => navigate('/dashboard')}>
+          Go to Dashboard
+        </Button>
+      )}
     </>
   );
 };
