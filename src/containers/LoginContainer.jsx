@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Login from '../components/Login';
-import LoginAction from '../actions/auth_action';
+import { login as LoginAction } from '../actions/auth_actions';
 
 const LoginContainer = ({ login, authState }) => <Login {...{ login, authState }} />;
 

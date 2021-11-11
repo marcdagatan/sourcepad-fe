@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Typography, Button, Box, Grid } from '@mui/material';
+import _ from 'lodash/fp';
 
 import { userPropTypes } from '../proptypes/userPropTypes';
 import { logout as logoutAction } from '../actions/auth_actions';
@@ -34,8 +35,9 @@ const Dashboard = ({ children, user, logout }) => {
   useEffect(() => {
     if (!email) {
       navigate('/');
+      return;
     }
-    if (profile) {
+    if (!_.keys(profile).length) {
       navigate('/dashboard/profile');
     }
   }, [email]);

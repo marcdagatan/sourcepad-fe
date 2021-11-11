@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import ProfileForm from '../components/ProfileForm';
 import { userPropTypes } from '../proptypes/userPropTypes';
-import { createProfile as createProfileAction } from '../actions/profile_actions';
+import createProfileAction from '../actions/profile_actions';
 
 const ProfileFormContainer = ({ user, createProfile }) => <ProfileForm user={user} createProfile={createProfile} />;
 

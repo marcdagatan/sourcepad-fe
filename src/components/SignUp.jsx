@@ -5,6 +5,7 @@ import { Card, CardContent, CardActions, Button, Typography, Grid, Box } from '@
 
 import { useNavigate } from 'react-router-dom';
 import { signUpErrorsPropTypes } from '../proptypes/errorsPropTypes';
+import arrToStr from '../utils/arrToStr';
 
 import TextField from './TextField';
 import Block from './Block';
@@ -14,8 +15,6 @@ const ActionsBox = styled(Box)`
   width: 100%;
   justify-content: space-between;
 `;
-
-const arrToStr = arr => (arr ? arr.join(', ') : '');
 
 const SignUp = ({ signUp, processing, errors, authState }) => {
   const navigate = useNavigate();
