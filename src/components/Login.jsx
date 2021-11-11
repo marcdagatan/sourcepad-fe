@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardContent, Typography, CardActions, Button, Alert, Box } from '@mui/material';
 import styled from 'styled-components';
@@ -18,6 +18,13 @@ const Login = ({ login, authState }) => {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authState === 'authenticated') {
+      navigate('/dashboard');
+    }
+  }, [authState]);
+
   const authenticating = authState === 'authenticating';
   const wrongCreds = authState === 'Unauthorized';
 

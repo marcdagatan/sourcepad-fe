@@ -1,4 +1,4 @@
-import axios from '../config/axios';
+import { axios } from '../config/axios';
 
 import { PROCESSING_SIGNUP, PROCESSING_FAILED, SIGNUP_SUCCESS } from './types';
 
