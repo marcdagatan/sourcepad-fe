@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Typography } from '@mui/material';
 
+import { userPropTypes } from '../proptypes/userPropTypes';
+
 const Topbar = styled.div`
   position: fixed;
   top: 0;
@@ -20,17 +22,20 @@ const Topbar = styled.div`
 `;
 
 const Body = styled.div`
-  width: 100vw;
   margin-top: 65px;
   padding: 1rem;
 `;
 
-const Dashboard = ({ children, email }) => {
+const Dashboard = ({ children, user }) => {
   const navigate = useNavigate();
+  const { email, profile } = user;
 
   useEffect(() => {
     if (!email) {
       navigate('/');
+    }
+    if (!profile) {
+      navigate('/dashboard/profile');
     }
   }, [email]);
 
@@ -47,11 +52,9 @@ const Dashboard = ({ children, email }) => {
 
 Dashboard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  email: PropTypes.string,
+  user: userPropTypes.isRequired,
 };
 
-Dashboard.defaultProps = { email: '' };
-
-const mapStateToProps = ({ auth: { user } }) => ({ email: user.email });
+const mapStateToProps = ({ auth: { user } }) => ({ user });
 
 export default connect(mapStateToProps)(Dashboard);

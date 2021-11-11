@@ -4,11 +4,14 @@ import { Routes, Route } from 'react-router-dom';
 import Homepage from '../pages/Homepage';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
+import Profile from '../pages/Profile';
 
 export default () => (
   <Routes>
     <Route exact path="/" element={<Homepage />} />
     <Route exact path="/login" element={<Login />} />
-    <Route exact path="/dashboard" element={<Dashboard />} />
+    <Route exact path="/dashboard" element={<Dashboard />}>
+      <Route path="profile" element={<Profile />} />
+    </Route>
   </Routes>
 );

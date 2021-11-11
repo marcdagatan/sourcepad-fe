@@ -1,8 +1,9 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 
 export default () => (
   <Dashboard>
-    <h1>Nothing here really..</h1>
+    <Outlet />
   </Dashboard>
 );
