@@ -26,7 +26,7 @@ const SignUp = ({ signUp, processing, errors, authState }) => {
 
   useEffect(() => {
     if (authState === 'newUser') {
-      navigate('/dashboard');
+      navigate('/login');
     }
   }, [authState]);
 
