@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Typography } from '@mui/material';
+import { Typography, Button, Box, Grid } from '@mui/material';
 
 import { userPropTypes } from '../proptypes/userPropTypes';
+import { logout as logoutAction } from '../actions/auth_actions';
 
 const Topbar = styled.div`
   position: fixed;
@@ -26,7 +27,7 @@ const Body = styled.div`
   padding: 1rem;
 `;
 
-const Dashboard = ({ children, user }) => {
+const Dashboard = ({ children, user, logout }) => {
   const navigate = useNavigate();
   const { email, profile } = user;
 
@@ -34,7 +35,7 @@ const Dashboard = ({ children, user }) => {
     if (!email) {
       navigate('/');
     }
-    if (!profile) {
+    if (profile) {
       navigate('/dashboard/profile');
     }
   }, [email]);
@@ -42,8 +43,21 @@ const Dashboard = ({ children, user }) => {
   return (
     <>
       <Topbar>
-        <Typography>Some test</Typography>
-        <Typography>Welcome, {email}!</Typography>
+        <Box>
+          <Typography>Some test</Typography>
+        </Box>
+        <Box>
+          <Grid container alignItems="center" spacing={1}>
+            <Grid item>
+              <Typography>Welcome, {email}!</Typography>
+            </Grid>
+            <Grid item>
+              <Button onClick={() => logout()} variant="outlined" color="secondary">
+                Logout
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
       </Topbar>
       <Body>{children}</Body>
     </>
@@ -53,8 +67,13 @@ const Dashboard = ({ children, user }) => {
 Dashboard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   user: userPropTypes.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ auth: { user } }) => ({ user });
 
-export default connect(mapStateToProps)(Dashboard);
+const mapActionsToProps = {
+  logout: logoutAction,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Dashboard);
