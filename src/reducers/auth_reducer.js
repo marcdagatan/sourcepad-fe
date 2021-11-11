@@ -5,10 +5,12 @@ import {
   AUTHENTICATING,
   AUTH_SUCCESS,
   AUTH_FETCH_USER_DATA,
+  LOGOUT,
+  CREATED_PROFILE,
 } from '../actions/types';
 
 const DEFAULT_STATE = {
-  user: null,
+  user: {},
   signup: { processing: false, errors: {} },
   authState: null,
   authToken: null,
@@ -28,6 +30,10 @@ export default (state = DEFAULT_STATE, { type, payload }) => {
       return { ...state, signup: { ...state.signup, processing: payload } };
     case AUTHENTICATING:
       return { ...state, authState: payload };
+    case CREATED_PROFILE:
+      return { ...state, user: { ...state.user, profile: { ...state.user.profile, ...payload } } };
+    case LOGOUT:
+      return DEFAULT_STATE;
     default:
       return state;
   }

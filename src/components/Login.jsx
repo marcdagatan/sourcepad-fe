@@ -27,6 +27,7 @@ const Login = ({ login, authState }) => {
 
   const authenticating = authState === 'authenticating';
   const wrongCreds = authState === 'Unauthorized';
+  const newUser = authState === 'newUser';
 
   return (
     <Card>
@@ -34,6 +35,11 @@ const Login = ({ login, authState }) => {
         <Block maxWidth="600px">
           <Typography variant="h4">Login</Typography>
         </Block>
+        {newUser && (
+          <Alert>
+            Hey you! <br /> Congrats on making your account. <br /> Do your first login now.
+          </Alert>
+        )}
         {wrongCreds && (
           <Alert severity="error">Oh nose.. You entered the wrong credentials, bud.. Try again, maybe?</Alert>
         )}

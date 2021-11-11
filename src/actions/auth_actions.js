@@ -1,7 +1,7 @@
 import { axios, axiosAuthenticated } from '../config/axios';
-import { AUTHENTICATING, AUTH_SUCCESS, AUTH_FETCH_USER_DATA } from './types';
+import { AUTHENTICATING, AUTH_SUCCESS, AUTH_FETCH_USER_DATA, LOGOUT } from './types';
 
-export default (email, password) => dispatch => {
+const login = (email, password) => dispatch => {
   dispatch({ type: AUTHENTICATING, payload: 'authenticating' });
 
   const params = { credentials: { email, password } };
@@ -17,3 +17,7 @@ export default (email, password) => dispatch => {
     })
     .catch(error => dispatch({ type: AUTHENTICATING, payload: error.response.statusText }));
 };
+
+const logout = () => dispatch => dispatch({ type: LOGOUT });
+
+export { login, logout };

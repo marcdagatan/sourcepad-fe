@@ -10,7 +10,6 @@ export default (email, password, passwordConfirmation) => dispatch => {
   axios
     .post('users', params)
     .then(({ data }) => {
-      console.log(data);
       dispatch({ type: SIGNUP_SUCCESS, payload: data });
     })
     .catch(error => dispatch({ type: PROCESSING_FAILED, payload: error.response.data }));
