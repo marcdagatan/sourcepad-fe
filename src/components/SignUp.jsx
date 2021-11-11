@@ -27,6 +27,9 @@ const SignUp = ({ signUp, processing, errors, authState }) => {
     if (authState === 'newUser') {
       navigate('/login');
     }
+    if (authState === 'authenticated') {
+      navigate('/dashboard');
+    }
   }, [authState]);
 
   return (
