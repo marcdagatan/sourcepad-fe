@@ -1,31 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Card, CardContent, CardActions, Button, Typography, TextField as MtTextField, Grid } from '@mui/material';
+import { Card, CardContent, CardActions, Button, Typography, Grid, Box } from '@mui/material';
 
+import { useNavigate } from 'react-router-dom';
 import { signUpErrorsPropTypes } from '../proptypes/errorsPropTypes';
 
+import TextField from './TextField';
 import Block from './Block';
 
-const Input = styled(MtTextField)`
+const ActionsBox = styled(Box)`
+  display: flex;
   width: 100%;
-`;
-
-const InputHolder = styled.div`
-  padding-bottom: 0.5rem;
+  justify-content: space-between;
 `;
 
 const arrToStr = arr => (arr ? arr.join(', ') : '');
 
-const TextField = ({ onChange, ...props }) => (
-  <InputHolder>
-    <Input onChange={e => onChange(e.target.value)} {...props} />
-  </InputHolder>
-);
-
-TextField.propTypes = { onChange: PropTypes.func.isRequired };
-
 const SignUp = ({ signUp, processing, errors }) => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -75,15 +69,20 @@ const SignUp = ({ signUp, processing, errors }) => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button
-          size="large"
-          color="primary"
-          variant="contained"
-          onClick={() => signUp(email, password, passwordConfirmation)}
-          disabled={processing}
-        >
-          {processing ? 'Please wait..' : 'Sign Up'}
-        </Button>
+        <ActionsBox>
+          <Button
+            size="large"
+            color="primary"
+            variant="contained"
+            onClick={() => signUp(email, password, passwordConfirmation)}
+            disabled={processing}
+          >
+            {processing ? 'Please wait..' : 'Sign Up'}
+          </Button>
+          <Button size="large" color="secondary" disabled={processing} onClick={() => navigate('/login')}>
+            I already have an account
+          </Button>
+        </ActionsBox>
       </CardActions>
     </Card>
   );
